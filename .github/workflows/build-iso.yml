@@ -1,0 +1,39 @@
+name: Build SMTH OS ISO
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y live-build debootstrap xorriso squashfs-tools mtools rustc cargo
+
+      - name: Make scripts executable
+        run: |
+          chmod +x scripts/*.sh || true
+
+      - name: Run ISO Build
+        run: |
+          if [ -f scripts/build-iso.sh ]; then
+            sudo bash scripts/build-iso.sh
+          else
+            echo "build-iso.sh not found inside scripts directory!"
+            exit 1
+          fi
+
+      - name: Upload ISO Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: smth-os-iso
+          path: "*.iso"
+          if-no-files-found: warn
