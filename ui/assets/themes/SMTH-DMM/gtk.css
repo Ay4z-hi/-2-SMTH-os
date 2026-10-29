@@ -1,0 +1,79 @@
+@define-color smth-black #000000;
+@define-color smth-white #FFFFFF;
+@define-color smth-accent #FF0033;
+@define-color smth-surface #121212;
+@define-color smth-frost rgba(18, 18, 18, 0.75);
+
+window {
+    background-color: @smth-black;
+    color: @smth-white;
+    font-family: "Inter", sans-serif;
+}
+
+headerbar {
+    background-color: transparent;
+    box-shadow: none;
+    min-height: 48px;
+}
+
+headerbar .title {
+    font-family: "Doto", monospace;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: @smth-white;
+}
+
+button {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: @smth-white;
+    transition: all 90ms ease-out;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+button:active {
+    transform: scale(0.96);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+button.accent,
+label.accent {
+    color: @smth-accent;
+}
+
+scrollbar {
+    background-color: transparent;
+}
+
+scrollbar slider {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    min-width: 6px;
+}
+
+scrollbar slider:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+tab {
+    background-color: transparent;
+    border-bottom: 2px solid transparent;
+    padding: 8px 16px;
+    font-family: "Doto", monospace;
+    font-size: 12px;
+}
+
+tab:checked {
+    border-bottom-color: @smth-accent;
+    color: @smth-white;
+}
+
+.frosted {
+    background-color: @smth-frost;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
