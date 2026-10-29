@@ -3,9 +3,9 @@ set -e
 
 echo "[*] Starting SMTH OS ISO Build Pipeline..."
 
-# 1. Update and install required host tools
+# 1. Update and install required host tools + Debian keyring
 sudo apt-get update
-sudo apt-get install -y live-build debootstrap xorriso squashfs-tools mtools genisoimage
+sudo apt-get install -y live-build debootstrap xorriso squashfs-tools mtools genisoimage debian-archive-keyring
 
 # 2. Create live-build workspace directory structure
 mkdir -p build-workspace/config
@@ -49,13 +49,7 @@ foot
 zsh
 EOF
 
-# 5. Copy your custom repository code into the chroot overlay if folders exist
-if [ -d "../core" ]; then
-  mkdir -p config/includes.chroot_after_packages/usr/bin
-  cp -r ../core/* config/includes.chroot_after_packages/usr/bin/ || true
-fi
-
-# 6. Add post-install hook to enable core services
+# 5. Add post-install hook to enable core services
 mkdir -p config/hooks/normal
 cat << 'EOF' > config/hooks/normal/9000-smth.hook.chroot
 #!/bin/sh
@@ -70,7 +64,7 @@ chmod +x config/hooks/normal/9000-smth.hook.chroot
 echo "[*] Building live ISO image..."
 sudo lb build
 
-# 7. Move generated ISO to root workspace for GitHub artifact upload
+# 6. Move generated ISO to root workspace for GitHub artifact upload
 if ls live-image-amd64.hybrid.iso 1> /dev/null 2>&1; then
   cp live-image-amd64.hybrid.iso ../smth-os-amd64.iso
   echo "[+] Success! ISO generated: smth-os-amd64.iso"
