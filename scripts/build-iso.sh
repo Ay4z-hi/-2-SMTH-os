@@ -16,7 +16,7 @@ lb config \
   --distribution trixie \
   --architectures amd64 \
   --binary-images iso-hybrid \
-  --bootloaders grub-efi,syslinux \
+  --bootloader grub-efi,syslinux \
   --debian-installer none \
   --archive-areas "main contrib non-free-firmware" \
   --linux-flavours amd64 \
