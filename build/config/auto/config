@@ -1,0 +1,59 @@
+# Live-Build Configuration for SMTH OS
+lb_config_package_architectures="x86_64 arm64"
+lb_config_image_name="smth-os"
+lb_config_image_version="1.0.0"
+lb_config_image_description="SMTH OS - Dot Matrix Minimalist Hybrid OS"
+lb_config_image_label="SMTH_OS"
+
+lb_config_grub="true"
+lb_config_grub_options="--theme=/usr/share/grub/themes/smth-dmm"
+
+lb_chroot_packages="
+    base-files
+    base-passwd
+    bash
+    coreutils
+    dpkg
+    e2fsprogs
+    findutils
+    grep
+    gzip
+    init
+    iproute2
+    kbd
+    keyboard-configuration
+    libpam-systemd
+    linux-base
+    locales
+    login
+    mount
+    ncurses-base
+    openssl
+    passwd
+    procps
+    sed
+    systemd
+    systemd-sysv
+    tar
+    util-linux
+    zstd
+    rustc
+    cargo
+    meson
+    ninja-build
+    gtk4
+    libgtk-4-dev
+    libpipewire-0.3-dev
+    libv4l-dev
+    box64
+    qemu-system-x86
+    qemu-system-arm
+    lxc
+    zram-tools
+"
+
+lb_chroot_archive="true"
+lb_chroot_options="
+    --archive-args=--compression=zstd
+    --bootappend-live=\"boot=live quiet splash smth.dmm=1\"
+"
