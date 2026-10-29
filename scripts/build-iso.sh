@@ -11,14 +11,18 @@ sudo apt-get install -y live-build debootstrap xorriso squashfs-tools mtools gen
 mkdir -p build-workspace/config
 cd build-workspace
 
-# 3. Configure Debian Live environment
+# 3. Configure Debian Live environment with explicit Debian mirrors
 lb config \
+  --mode debian \
   --distribution trixie \
   --architectures amd64 \
   --binary-images iso-hybrid \
   --bootloader grub-efi,syslinux \
   --debian-installer none \
   --archive-areas "main contrib non-free-firmware" \
+  --mirror-bootstrap "http://deb.debian.org/debian/" \
+  --mirror-chroot "http://deb.debian.org/debian/" \
+  --mirror-binary "http://deb.debian.org/debian/" \
   --linux-flavours amd64 \
   --bootappend-live "boot=live quiet splash loglevel=3 zswap.enabled=1" \
   --iso-application "SMTH-OS" \
