@@ -67,7 +67,7 @@ useradd -m -G video,input,render,audio smth || true
 EOF
 chmod +x config/hooks/normal/9000-smth.hook.chroot
 
-echo "[*] Building live ISO image (this may take a few minutes)..."
+echo "[*] Building live ISO image..."
 sudo lb build
 
 # 7. Move generated ISO to root workspace for GitHub artifact upload
@@ -78,4 +78,3 @@ else
   echo "[-] Build failed: ISO image not found."
   exit 1
 fi
-
